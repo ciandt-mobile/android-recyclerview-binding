@@ -1,23 +1,21 @@
+@file:JvmName("BindableRecyclerViewAdapter")
 package com.ciandt.recyclerviewbinding
 
+import android.databinding.BindingAdapter
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.databinding.ObservableArrayList
-import android.databinding.BindingAdapter
 
-
-
-class BindableRecyclerViewAdapter<TDataBinding : ViewDataBinding, TData : Any>(
-    @LayoutRes val itemLayoutRes: Int, val bind: (TDataBinding, TData) -> Unit
+class BindableRecyclerViewAdapter<TDataBinding : ViewDataBinding, TData : Any?>(
+    @LayoutRes private val itemLayoutRes: Int, private val bind: (TDataBinding, TData) -> Unit
 ) :
     RecyclerView.Adapter<BindableRecyclerViewAdapter.ViewHolder<TDataBinding>>() {
 
     private lateinit var layoutInflater: LayoutInflater
-    private lateinit var list: Collection<TData>
+    private lateinit var collection: Collection<*>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder<TDataBinding> {
         if (!::layoutInflater.isInitialized) {
@@ -35,21 +33,31 @@ class BindableRecyclerViewAdapter<TDataBinding : ViewDataBinding, TData : Any>(
     }
 
     override fun getItemCount(): Int {
-        return if (::list.isInitialized) list.size else 0
+        return if (::collection.isInitialized) collection.size else 0
     }
 
     override fun onBindViewHolder(holder: ViewHolder<TDataBinding>, position: Int) {
-        if (::list.isInitialized && list.isNotEmpty()) {
+        if (::collection.isInitialized && collection.isNotEmpty()) {
 
-            val item = list.elementAt(position)
+            val item = collection.elementAt(position)
 
-            bind(holder.binding, item)
+            @Suppress("UNCHECKED_CAST")
+            bind(holder.binding, item as TData)
         }
     }
 
-    fun update(list: Collection<TData>) {
-        this.list = list
+    fun update(collection: Collection<Any?>) {
+        this.collection = collection
         notifyDataSetChanged()
+    }
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("collection")
+        fun RecyclerView.bindCollection(collection: Collection<*>) {
+            val adapter = adapter as BindableRecyclerViewAdapter<*, *>
+            adapter.update(collection)
+        }
     }
 
     class ViewHolder<T : ViewDataBinding>(val binding: T) : RecyclerView.ViewHolder(binding.root)
