@@ -4,9 +4,9 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
 
-    val items : LiveData<List<String>> = MutableLiveData<List<String>>()
+    val items: LiveData<Array<String>> = MutableLiveData<Array<String>>()
 
     init {
 
@@ -16,6 +16,6 @@ class MainViewModel: ViewModel() {
             items.add("Item $i")
         }
 
-        (this.items as MutableLiveData<List<String>>).value = items
+        (this.items as MutableLiveData<Array<String>>).value = items.toTypedArray()
     }
 }
