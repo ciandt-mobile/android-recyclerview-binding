@@ -1,5 +1,96 @@
 # RecyclerView + Data Binding Sample
 
+## ViewModel
+
+```kotlin
+class MainViewModel : ViewModel() {
+
+    val items: LiveData<Array<String>> = MutableLiveData<Array<String>>()
+}
+```
+## RecyclerView Layout
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ciandt.recyclerviewbinding.MainViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout>
+
+        <android.support.v7.widget.RecyclerView
+            ...
+            bind:items="@{viewModel.items}"/> <!--Binding LiveData property-->
+    </android.support.constraint.ConstraintLayout>
+</layout>
+```
+
+## Adapter
+
+```kotlin
+class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+
+    private var items: Array<String> = emptyArray()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder { ... }
+
+    override fun getItemCount() { ... }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (items.size > position) {
+            holder.bind(items[position])
+        }
+    }
+
+    fun update(items: Array<String>) { ... }
+
+    companion object {
+        @JvmStatic
+        @BindingAdapter("items") // app:items attribute in RecyclerView
+        fun RecyclerView.bindItems(items: Array<String>) {
+            val adapter = adapter as MainAdapter
+            adapter.update(items)
+        }
+    }
+
+    class ViewHolder(private val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: String) {
+            binding.item = item // Bindind RecyclerView row
+        }
+    }
+}
+```
+
+## RecyclerView item layout
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="String" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout>
+
+        <TextView
+            ...
+            android:text="@{item}"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
+```
+
 ```
 MIT License
 
