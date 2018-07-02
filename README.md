@@ -14,7 +14,7 @@ class MainViewModel : ViewModel() {
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -27,7 +27,7 @@ class MainViewModel : ViewModel() {
 
         <android.support.v7.widget.RecyclerView
             ...
-            bind:items="@{viewModel.items}"/> <!--Binding LiveData property-->
+            app:items="@{viewModel.items}"/> <!--Binding LiveData property-->
     </android.support.constraint.ConstraintLayout>
 </layout>
 ```
