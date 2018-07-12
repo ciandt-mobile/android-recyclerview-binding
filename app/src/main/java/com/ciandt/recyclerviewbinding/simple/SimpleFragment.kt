@@ -5,11 +5,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ciandt.recyclerviewbinding.MainAdapter
 import com.ciandt.recyclerviewbinding.R
 import com.ciandt.recyclerviewbinding.databinding.FragmentSimpleBinding
 import kotlinx.android.synthetic.main.fragment_simple.*
@@ -35,9 +35,12 @@ class SimpleFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(SimpleViewModel::class.java)
 
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val layoutManager = LinearLayoutManager(context)
+
+        recyclerView.layoutManager = layoutManager
         recyclerView.hasFixedSize()
-        recyclerView.adapter = MainAdapter()
+        recyclerView.adapter = SimpleAdapter()
+        recyclerView.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
 
         binding.viewModel = viewModel
     }

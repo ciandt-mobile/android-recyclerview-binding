@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_simple"
+        android:enabled="true"
+        android:icon="@drawable/ic_simple"
+        android:title="@string/simple"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_endless"
+        android:enabled="true"
+        android:icon="@drawable/ic_endless"
+        android:title="@string/endless"
+        app:showAsAction="ifRoom" />
+</menu>

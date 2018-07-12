@@ -1,15 +1,16 @@
-@file:JvmName("MainAdapter")
+@file:JvmName("SimpleAdapter")
 
-package com.ciandt.recyclerviewbinding
+package com.ciandt.recyclerviewbinding.simple
 
 import android.databinding.BindingAdapter
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.ciandt.recyclerviewbinding.R
 import com.ciandt.recyclerviewbinding.databinding.ItemViewBinding
 
-class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class SimpleAdapter : RecyclerView.Adapter<SimpleAdapter.ViewHolder>() {
 
     private lateinit var layoutInflater: LayoutInflater
     private var items: Array<String> = emptyArray()
@@ -46,7 +47,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         @JvmStatic
         @BindingAdapter("items")
         fun RecyclerView.bindItems(items: Array<String>) {
-            val adapter = adapter as MainAdapter
+            val adapter = adapter as SimpleAdapter
             adapter.update(items)
         }
     }
