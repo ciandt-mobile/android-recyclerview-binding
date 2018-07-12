@@ -1,10 +1,10 @@
-package com.ciandt.recyclerviewbinding
+package com.ciandt.recyclerviewbinding.simple
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 
-class MainViewModel : ViewModel() {
+class SimpleViewModel : ViewModel() {
 
     val items: LiveData<Array<String>> = MutableLiveData<Array<String>>()
 
