@@ -1,4 +1,4 @@
-package com.ciandt.recyclerviewbinding.endless
+package com.ciandt.recyclerviewbinding.presentation.endless
 
 
 import android.os.Bundle

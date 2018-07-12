@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.ciandt.recyclerviewbinding.simple.SimpleViewModel" />
+            type="com.ciandt.recyclerviewbinding.presentation.simple.SimpleViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

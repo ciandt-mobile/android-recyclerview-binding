@@ -1,4 +1,4 @@
-package com.ciandt.recyclerviewbinding.simple
+package com.ciandt.recyclerviewbinding.presentation.simple
 
 
 import android.arch.lifecycle.ViewModelProviders

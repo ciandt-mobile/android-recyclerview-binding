@@ -1,10 +1,10 @@
-package com.ciandt.recyclerviewbinding.main
+package com.ciandt.recyclerviewbinding.presentation.main
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.ciandt.recyclerviewbinding.endless.EndlessFragment
-import com.ciandt.recyclerviewbinding.simple.SimpleFragment
+import com.ciandt.recyclerviewbinding.presentation.endless.EndlessFragment
+import com.ciandt.recyclerviewbinding.presentation.simple.SimpleFragment
 
 class ViewPagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
 
