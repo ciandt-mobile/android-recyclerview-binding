@@ -2,11 +2,11 @@
 
 ## Simple sample
 
-![](https://github.comciandt-mobile/android-recyclerview-binding/blob/master/images/simple.gif?raw=true)
+![](https://raw.githubusercontent.com/ciandt-mobile/android-recyclerview-binding/master/images/simple.gif)
 
 ## Endless Scroll sample
 
-![](https://github.comciandt-mobile/android-recyclerview-binding/blob/master/images/endless.gif?raw=true)
+![](https://raw.githubusercontent.com/ciandt-mobile/android-recyclerview-binding/master/images/endless.gif)
 
 
 ```
