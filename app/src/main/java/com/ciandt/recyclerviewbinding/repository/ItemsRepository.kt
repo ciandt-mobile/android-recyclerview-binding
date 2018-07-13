@@ -4,7 +4,7 @@ class ItemsRepository {
 
     private var nextItem = 1
 
-    fun getItemsPage(pageSize: Int = 30): List<String> {
+    fun getItemsPage(pageSize: Int = 20): List<String> {
 
         val items = mutableListOf<String>()
         val lastItem = nextItem + pageSize - 1
