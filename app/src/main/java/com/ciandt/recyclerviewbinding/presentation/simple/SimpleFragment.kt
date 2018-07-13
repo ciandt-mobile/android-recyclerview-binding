@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ciandt.recyclerviewbinding.R
 import com.ciandt.recyclerviewbinding.databinding.FragmentSimpleBinding
+import com.ciandt.recyclerviewbinding.presentation.items.ItemsAdapter
 import kotlinx.android.synthetic.main.fragment_simple.*
 
 class SimpleFragment : Fragment() {
@@ -33,13 +34,13 @@ class SimpleFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProviders.of(this).get(SimpleViewModel::class.java)
+        viewModel = ViewModelProviders.of(this)[SimpleViewModel::class.java]
 
         val layoutManager = LinearLayoutManager(context)
 
         recyclerView.layoutManager = layoutManager
         recyclerView.hasFixedSize()
-        recyclerView.adapter = SimpleAdapter()
+        recyclerView.adapter = ItemsAdapter()
         recyclerView.addItemDecoration(DividerItemDecoration(context, layoutManager.orientation))
 
         binding.viewModel = viewModel
