@@ -4,13 +4,13 @@ package com.ciandt.recyclerviewbinding.presentation.items
 
 import android.databinding.BindingAdapter
 import android.databinding.DataBindingUtil
-import android.graphics.drawable.AnimationDrawable
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.ciandt.recyclerviewbinding.R
 import com.ciandt.recyclerviewbinding.databinding.ItemViewBinding
+import com.ciandt.recyclerviewbinding.presentation.startAnimation
 import kotlinx.android.synthetic.main.loading_view.view.*
 
 class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
@@ -81,9 +81,7 @@ class ItemsAdapter : RecyclerView.Adapter<ItemsAdapter.ViewHolder>() {
         ViewHolder(view) {
 
         init {
-            view.imgLoading.setBackgroundResource(R.drawable.ic_loading)
-            val animation = view.imgLoading.background as AnimationDrawable
-            view.post { animation.start() }
+            view.imgLoading.post { view.imgLoading.drawable.startAnimation() }
         }
     }
 }
