@@ -9,7 +9,7 @@ open class Event<out T>(val data: T) {
     var hasBeenHandled = false
         protected set
 
-    fun subscribe(body: Event<T>.() -> Unit) {
+    fun trigger(body: Event<T>.() -> Unit) {
         if (!hasBeenHandled) {
             hasBeenHandled = true
             body(this)
@@ -21,6 +21,6 @@ class SimpleEvent : Event<Any?>(null)
 
 fun <T : Event<*>> LiveData<T>.subscribe(owner: LifecycleOwner, body: T.() -> Unit) {
     observe(owner, Observer {
-        it?.subscribe { body(it) }
+        it?.trigger { body(it) }
     })
 }
