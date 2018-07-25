@@ -4,8 +4,10 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.os.Handler
-import com.ciandt.recyclerviewbinding.presentation.SimpleEvent
+import com.ciandt.recyclerviewbinding.presentation.Event
 import com.ciandt.recyclerviewbinding.repository.ItemsRepository
+
+data class Page(val positionStart: Int, val count: Int)
 
 class EndlessViewModel : ViewModel() {
 
@@ -13,7 +15,8 @@ class EndlessViewModel : ViewModel() {
     private val list = mutableListOf<String>()
 
     private val _items = MutableLiveData<List<String>>().apply { value = list }
-    private val _updateList = MutableLiveData<SimpleEvent>()
+    private val _addItems = MutableLiveData<Event<Page>>()
+    private val _removeItem = MutableLiveData<Event<Int>>()
 
     private val handler = Handler()
 
@@ -24,8 +27,11 @@ class EndlessViewModel : ViewModel() {
     val items: LiveData<List<String>>
         get() = _items
 
-    val updateList: LiveData<SimpleEvent>
-        get() = _updateList
+    val addItems: LiveData<Event<Page>>
+        get() = _addItems
+
+    val removeItem: LiveData<Event<Int>>
+        get() = _removeItem
 
     init {
         fetchItems()
@@ -40,11 +46,13 @@ class EndlessViewModel : ViewModel() {
             // Simulate delay
 
             handler.postDelayed({
-                removeLoading()
 
-                list.addAll(repository.getItemsPage())
+                val position = list.size
+                val newItems = repository.getItemsPage()
+                list.addAll(newItems)
 
-                updateList()
+                addItems(position, newItems.size)
+                removeLoading(position-1)
 
                 delay = if (delay == 0L) 3000 else 0
                 loading = false
@@ -54,16 +62,19 @@ class EndlessViewModel : ViewModel() {
 
     private fun showLoading() {
         list.add("loading")
-        updateList()
+        addItems(list.size - 1, 1)
     }
 
-    private fun removeLoading() {
-        if (list.last() == "loading") {
-            list.removeAt(list.lastIndex)
-        }
+    private fun removeLoading(position: Int) {
+        list.removeAt(position)
+        removeItems(position)
     }
 
-    private fun updateList() {
-        _updateList.value = SimpleEvent()
+    private fun addItems(positionStart: Int, count: Int) {
+        _addItems.value = Event(Page(positionStart, count))
+    }
+
+    private fun removeItems(positionStart: Int) {
+        _removeItem.value = Event(positionStart)
     }
 }

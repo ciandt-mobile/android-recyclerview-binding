@@ -47,8 +47,11 @@ class EndlessFragment : Fragment() {
 
         recyclerView.endless { viewModel.fetchItems() }
 
-        viewModel.updateList.subscribe(this) {
-            recyclerView.adapter.notifyDataSetChanged()
+        viewModel.addItems.subscribe(this) {
+            recyclerView.adapter.notifyItemRangeInserted(data.positionStart, data.count)
+        }
+        viewModel.removeItem.subscribe(this) {
+            recyclerView.adapter.notifyItemRemoved(data)
         }
 
         binding.viewModel = viewModel
