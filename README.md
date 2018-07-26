@@ -64,7 +64,7 @@ class SimpleFragment : Fragment() {
 }
 ```
 
-## Endless Scroll sample
+## Endless Scroll sample (accessibility support)
 
 ![](https://raw.githubusercontent.com/ciandt-mobile/android-recyclerview-binding/master/images/endless.gif)
 
